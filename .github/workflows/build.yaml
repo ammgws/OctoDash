@@ -14,7 +14,8 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -24,14 +25,18 @@ jobs:
           key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             octodash-build-${{ env.cache-name }}-
+
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '14'
+
       - name: Install latest npm
         run: sudo npm install -g npm@latest
+
       - name: Installing Dependencies
         run: npm ci
+
       - name: Linting Application
         run: npm run lint
 
@@ -40,7 +45,8 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -50,15 +56,20 @@ jobs:
           key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             octodash-build-${{ env.cache-name }}-
+
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '14'
+
       - name: Install latest npm
         run: sudo npm install -g npm@latest
+
       - name: Installing Dependencies
         run: npm ci
+
       - name: Building Application
         run: npm run build:prod
+
       - name: Packaging Application
         run: npm run electron:pack
