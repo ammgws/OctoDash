@@ -780,6 +780,8 @@ sudo dpkg -i octodash.deb
 
 rm octodash.deb
 
+echo "startup_message off" >> $HOME/.ratpoisonrc
+
 yes_no=( 'yes' 'no' )
 
 list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
